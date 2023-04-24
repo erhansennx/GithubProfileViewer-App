@@ -1,3 +1,6 @@
 <resources>
     <string name="app_name">Github Profile Viewer</string>
+    <string name="username">Username</string>
+    <string name="github_profile_viewer">Github Profile Viewer</string>
+    <string name="name_surname">Name Surname</string>
 </resources>
