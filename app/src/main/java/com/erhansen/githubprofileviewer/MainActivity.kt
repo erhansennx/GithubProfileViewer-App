@@ -1,9 +1,11 @@
 package com.erhansen.githubprofileviewer
 
+import android.content.Context
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
 import android.view.inputmethod.EditorInfo
+import android.view.inputmethod.InputMethodManager
 import com.erhansen.githubprofileviewer.databinding.ActivityMainBinding
 import com.erhansen.githubprofileviewer.service.UserProfileApi
 import com.erhansen.githubprofileviewer.service.UserProfileApiService
@@ -39,6 +41,8 @@ class MainActivity : AppCompatActivity() {
                             }
                         }
                     }
+                    val imm = this@MainActivity.getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
+                    imm.hideSoftInputFromWindow(searchUser.windowToken, 0)
                     return@setOnEditorActionListener true
                 } else {
                     return@setOnEditorActionListener false
