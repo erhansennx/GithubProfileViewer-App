@@ -11,9 +11,11 @@ import android.view.inputmethod.InputMethodManager
 import androidx.core.content.ContextCompat
 import com.bumptech.glide.Glide
 import com.erhansen.githubprofileviewer.databinding.ActivityMainBinding
+import com.erhansen.githubprofileviewer.model.UserProfileModel
 import com.erhansen.githubprofileviewer.service.UserProfileApi
 import com.erhansen.githubprofileviewer.service.UserProfileApiService
 import kotlinx.coroutines.*
+import retrofit2.Response
 
 class MainActivity : AppCompatActivity() {
 
@@ -41,10 +43,17 @@ class MainActivity : AppCompatActivity() {
                             }
 
                             if (result.isSuccessful) {
+                                nullViewCheck(result)
                                 Glide.with(this@MainActivity).load(result.body()!!.avatarUrl).centerCrop().placeholder(R.drawable.ic_launcher_background).into(profilePhoto)
                                 nameText.text = result.body()!!.name
                                 usernameText.text = result.body()!!.login
-                                biographyText.text = result.body()!!.bio
+                                biographyText.text = result.body()?.bio
+                                followerText.text = "${result.body()!!.followers} followers · ${result.body()!!.following} following"
+                                locationText.text = result.body()?.location
+                                emailText.text = result.body()?.email.toString()
+                                companyText.text = result.body()?.company.toString()
+                                twitterText.text = result.body()?.twitterUsername.toString()
+                                linkText.text = result.body()?.blog
                                 userProgress.visibility = View.GONE
                             } else if (result.code() == 404) {
                                 // user not found!
@@ -63,10 +72,19 @@ class MainActivity : AppCompatActivity() {
             }
             scope.cancel()
         }
+    }
 
-
-
-
+    private fun nullViewCheck(result: Response<UserProfileModel>) {
+        with(activityMainBinding) {
+            if (result.body()?.name.isNullOrEmpty()) nameText.visibility = View.GONE else nameText.visibility = View.VISIBLE
+            if (result.body()?.name.isNullOrEmpty()) nameText.visibility = View.GONE else nameText.visibility = View.VISIBLE
+            if (result.body()?.bio.isNullOrEmpty()) biographyText.visibility = View.GONE else biographyText.visibility = View.VISIBLE
+            if (result.body()?.location.isNullOrEmpty()) locationText.visibility = View.GONE else locationText.visibility = View.VISIBLE
+            if (result.body()?.email.toString() == "null") emailText.visibility = View.GONE else emailText.visibility = View.VISIBLE
+            if (result.body()?.company.toString() == "null") companyText.visibility = View.GONE else companyText.visibility = View.VISIBLE
+            if (result.body()?.twitterUsername.toString() == "null") twitterText.visibility = View.GONE else twitterText.visibility = View.VISIBLE
+            if (result.body()?.blog.isNullOrEmpty()) linkText.visibility = View.GONE else linkText.visibility = View.VISIBLE
+        }
     }
 
 
