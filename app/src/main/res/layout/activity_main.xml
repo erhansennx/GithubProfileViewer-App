@@ -23,26 +23,44 @@
         android:textColor="@color/white"
         android:textSize="24sp" />
 
-    <com.google.android.material.textfield.TextInputLayout
-        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+    <FrameLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginHorizontal="20dp"
-        android:layout_marginTop="15dp"
-        app:boxStrokeColor="@color/github_gray"
-        app:hintTextColor="@color/github_gray">
+        android:layout_marginTop="15dp">
 
-        <com.google.android.material.textfield.TextInputEditText
-            android:id="@+id/searchUser"
+        <com.google.android.material.textfield.TextInputLayout
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+            android:id="@+id/searchUserLayout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:drawableStart="@drawable/github"
-            android:drawableEnd="@drawable/baseline_search_24"
-            android:drawablePadding="15dp"
-            android:fontFamily="@font/poppinsmedium"
-            android:hint="@string/username"
-            android:inputType="text" />
-    </com.google.android.material.textfield.TextInputLayout>
+            app:boxStrokeColor="@color/github_gray"
+            app:hintTextColor="@color/github_gray">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/searchUser"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:drawableStart="@drawable/github"
+                android:drawableEnd="@drawable/baseline_search_24"
+                android:drawablePadding="15dp"
+                android:fontFamily="@font/poppinsmedium"
+                android:hint="@string/username"
+                android:inputType="text" />
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <ProgressBar
+            android:id="@+id/userProgress"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginTop="3dp"
+            android:scaleX="0.5"
+            android:scaleY="0.5"
+            android:indeterminateTint="@color/green"
+            android:indeterminateTintMode="src_in"
+            android:background="@drawable/round"
+            android:layout_gravity="center"/>
+    </FrameLayout>
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -50,6 +68,7 @@
         android:layout_marginHorizontal="20dp"
         android:layout_marginTop="50dp"
         android:background="@drawable/border"
+        android:orientation="vertical"
         android:padding="15dp">
 
         <LinearLayout
@@ -57,9 +76,10 @@
             android:layout_height="wrap_content"
             android:orientation="horizontal">
 
-            <ImageView
-                android:layout_width="50dp"
-                android:layout_height="50dp"
+            <de.hdodenhof.circleimageview.CircleImageView xmlns:app="http://schemas.android.com/apk/res-auto"
+                android:id="@+id/profilePhoto"
+                android:layout_width="65dp"
+                android:layout_height="65dp"
                 android:src="@drawable/ic_launcher_background" />
 
             <LinearLayout
@@ -70,18 +90,37 @@
                 android:orientation="vertical">
 
                 <TextView
-                    android:layout_width="wrap_content"
+                    android:id="@+id/nameText"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:hint="@string/name_surname" />
+                    android:fontFamily="@font/poppinsmedium"
+                    android:hint="@string/name_surname"
+                    android:textColor="@color/black"
+                    android:textSize="15sp" />
 
                 <TextView
-                    android:layout_width="wrap_content"
+                    android:id="@+id/usernameText"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:hint="@string/username" />
+                    android:fontFamily="@font/poppinslight"
+                    android:hint="@string/username"
+                    android:textSize="12sp" />
 
             </LinearLayout>
 
         </LinearLayout>
+
+        <TextView
+            android:id="@+id/biographyText"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="3dp"
+            android:layout_marginTop="10dp"
+            android:fontFamily="@font/poppinsregular"
+            android:hint="@string/username"
+            android:text="@string/short_lorem_ipsum"
+            android:textColor="@color/black"
+            android:textSize="12sp" />
 
 
     </LinearLayout>
