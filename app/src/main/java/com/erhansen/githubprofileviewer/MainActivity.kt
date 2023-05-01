@@ -27,6 +27,8 @@ class MainActivity : AppCompatActivity() {
         setContentView(activityMainBinding.root)
 
         activityMainBinding.userProgress.visibility = View.GONE
+        activityMainBinding.userProfileLayout.visibility = View.GONE
+        activityMainBinding.userNotFound.visibility = View.GONE
         val userProfileApi = UserProfileApiService.getInstance().create(UserProfileApi::class.java)
         val scope = CoroutineScope(Dispatchers.Main)
 
@@ -43,6 +45,8 @@ class MainActivity : AppCompatActivity() {
                             }
 
                             if (result.isSuccessful) {
+                                userProfileLayout.visibility = View.VISIBLE
+                                userNotFound.visibility = View.GONE
                                 nullViewCheck(result)
                                 Glide.with(this@MainActivity).load(result.body()!!.avatarUrl).centerCrop().placeholder(R.drawable.ic_launcher_background).into(profilePhoto)
                                 nameText.text = result.body()!!.name
@@ -57,6 +61,9 @@ class MainActivity : AppCompatActivity() {
                                 userProgress.visibility = View.GONE
                             } else if (result.code() == 404) {
                                 // user not found!
+                                userProfileLayout.visibility = View.GONE
+                                userNotFound.visibility = View.VISIBLE
+                                userNotFoundText.text = "${getString(R.string.user_not_found)} '${searchUser.text}'"
                             }
                             userProgress.visibility = View.GONE
                             searchUserLayout.boxBackgroundColor = ContextCompat.getColor(this@MainActivity, R.color.white)

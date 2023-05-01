@@ -1,7 +1,7 @@
 <resources>
     <string name="app_name">Github Profile Viewer</string>
     <string name="username">Username</string>
-    <string name="github_profile_viewer">Hello! \nWelcome to Github Profile Viewer</string>
+    <string name="github_profile_viewer">Hello! Welcome to \nGithub Profile Viewer</string>
     <string name="name_surname">Name Surname</string>
     <string name="short_lorem_ipsum">Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry\'s standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.</string>
     <string name="long_lorem_ipsum">Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry\'s standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.</string>
@@ -12,4 +12,5 @@
     <string name="link">Link</string>
     <string name="twitter">Twitter</string>
     <string name="show_repositories">Show Repositories</string>
+    <string name="user_not_found">We couldn’t find any users matching</string>
 </resources>
