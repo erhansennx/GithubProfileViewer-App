@@ -79,8 +79,7 @@
                 android:layout_height="wrap_content"
                 android:orientation="horizontal">
 
-                <de.hdodenhof.circleimageview.CircleImageView
-                    xmlns:app="http://schemas.android.com/apk/res-auto"
+                <de.hdodenhof.circleimageview.CircleImageView xmlns:app="http://schemas.android.com/apk/res-auto"
                     android:id="@+id/profilePhoto"
                     android:layout_width="65dp"
                     android:layout_height="65dp"
@@ -202,41 +201,68 @@
                 app:drawableStartCompat="@drawable/baseline_link_24"
                 tools:ignore="TextViewEdits" />
 
-
-            <Button
-                android:id="@+id/showRepositories"
+            <FrameLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="15dp"
-                android:backgroundTint="@color/green"
-                android:text="@string/show_repositories"
-                android:textAllCaps="false" />
+                android:layout_height="wrap_content">
+
+                <TextView
+                    android:id="@+id/showRepositories"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="15dp"
+                    android:background="@drawable/round_4"
+                    android:backgroundTint="@color/green"
+                    android:fontFamily="sans-serif-medium"
+                    android:gravity="center"
+                    android:paddingTop="5dp"
+                    android:paddingBottom="6dp"
+                    android:text="@string/show_repositories"
+                    android:textAllCaps="false"
+                    android:textColor="@color/white" />
+
+                <ProgressBar
+                    android:id="@+id/showRepoProgress"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_gravity="center"
+                    android:layout_marginTop="4dp"
+                    android:visibility="gone"
+                    android:background="@drawable/round_4"
+                    android:backgroundTint="@color/green"
+                    android:indeterminateTint="@color/white"
+                    android:indeterminateTintMode="src_in"
+                    android:scaleX="0.4"
+                    android:scaleY="0.4" />
+
+            </FrameLayout>
+
         </LinearLayout>
 
         <LinearLayout
             android:id="@+id/userNotFound"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:gravity="center|top"
-            android:padding="15dp"
             android:background="@drawable/border"
-            android:orientation="vertical">
+            android:gravity="center|top"
+            android:orientation="vertical"
+            android:padding="15dp"
+            android:visibility="gone">
 
             <ImageView
                 android:layout_width="75dp"
                 android:layout_height="75dp"
                 android:layout_gravity="center"
-                android:src="@drawable/github"/>
+                android:src="@drawable/github" />
 
             <TextView
                 android:id="@+id/userNotFoundText"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="20dp"
-                android:text="@string/user_not_found"
-                android:textColor="@color/black"
+                android:fontFamily="@font/poppinsmedium"
                 android:gravity="center"
-                android:fontFamily="@font/poppinsmedium"/>
+                android:text="@string/user_not_found"
+                android:textColor="@color/black" />
 
         </LinearLayout>
     </FrameLayout>

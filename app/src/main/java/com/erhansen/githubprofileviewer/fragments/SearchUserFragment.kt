@@ -7,15 +7,16 @@ import android.view.View
 import android.view.ViewGroup
 import android.view.inputmethod.EditorInfo
 import android.view.inputmethod.InputMethodManager
+import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import com.bumptech.glide.Glide
 import com.erhansen.githubprofileviewer.R
-import com.erhansen.githubprofileviewer.databinding.FragmentRepositoriesBinding
 import com.erhansen.githubprofileviewer.databinding.FragmentSearchUserBinding
 import com.erhansen.githubprofileviewer.model.UserProfileModel
 import com.erhansen.githubprofileviewer.service.UserProfileApi
 import com.erhansen.githubprofileviewer.service.UserProfileApiService
+import com.erhansen.githubprofileviewer.utils.CreateFragment
 import kotlinx.coroutines.*
 import retrofit2.Response
 
@@ -58,6 +59,7 @@ class SearchUserFragment : Fragment() {
                             if (result.isSuccessful) {
                                 userProfileLayout.visibility = View.VISIBLE
                                 userNotFound.visibility = View.GONE
+                                showRepoProgress.visibility = View.GONE
                                 nullViewCheck(result)
                                 Glide.with(requireActivity()).load(result.body()!!.avatarUrl).centerCrop().placeholder(
                                     R.drawable.ic_launcher_background
@@ -92,7 +94,25 @@ class SearchUserFragment : Fragment() {
                     return@setOnEditorActionListener false
                 }
             }
+
             scope.cancel()
+
+            showRepositories.setOnClickListener {
+                showRepoProgress.visibility = View.VISIBLE
+                CoroutineScope(Dispatchers.Main).launch { // runBlocking {} made a delay?
+                    val getRepositories =  withContext(Dispatchers.IO) {
+                        userProfileApi.getUserRepositories(searchUser.text.toString())
+                    }
+                    if (getRepositories.isSuccessful) {
+                        val bundle = Bundle()
+                        bundle.putParcelable("repositories", getRepositories.body())
+                        val createFragment = CreateFragment(requireActivity() as AppCompatActivity, RepositoriesFragment(), bundle)
+                        searchUser.text = null
+                    }
+                    showRepoProgress.visibility = View.VISIBLE
+                }
+            }
+
         }
 
     }
@@ -109,7 +129,5 @@ class SearchUserFragment : Fragment() {
             if (result.body()?.blog.isNullOrEmpty()) linkText.visibility = android.view.View.GONE else linkText.visibility = android.view.View.VISIBLE
         }
     }
-
-
 
 }
