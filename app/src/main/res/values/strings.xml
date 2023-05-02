@@ -13,4 +13,10 @@
     <string name="twitter">Twitter</string>
     <string name="show_repositories">Show Repositories</string>
     <string name="user_not_found">We couldn’t find any users matching</string>
+    <string name="repo_name">Repo Name</string>
+    <string name="publicc">Public</string>
+    <string name="description">description</string>
+    <string name="language">Language</string>
+    <string name="star">star</string>
+    <string name="repositories">Repositories</string>
 </resources>

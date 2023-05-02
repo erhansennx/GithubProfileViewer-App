@@ -10,4 +10,6 @@
     <color name="github_gray">#24292F</color>
     <color name="transparent">#15000000</color>
     <color name="green">#4CAF50</color>
+    <color name="textBlue">#0969DA</color>
+    <color name="starBg">#555759</color>
 </resources>
