@@ -2,6 +2,7 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:background="@drawable/border"
     android:layout_marginTop="10dp"
     android:orientation="vertical">
@@ -50,6 +51,7 @@
             android:layout_width="15dp"
             android:layout_height="15dp"
             android:src="@color/green"
+            app:civ_circle_background_color="@color/black"
             android:layout_gravity="center"/>
         <TextView
             android:id="@+id/languageText"
@@ -66,7 +68,7 @@
             android:layout_height="wrap_content"
             android:background="@drawable/baseline_star_border_24"
             android:backgroundTint="@color/starBg"
-            android:layout_marginStart="15dp"/>
+            android:layout_marginStart="5dp"/>
 
         <TextView
             android:id="@+id/starText"

@@ -6,6 +6,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
+import com.erhansen.githubprofileviewer.R
 import com.erhansen.githubprofileviewer.adapter.RepositoriesAdapter
 import com.erhansen.githubprofileviewer.databinding.FragmentRepositoriesBinding
 import com.erhansen.githubprofileviewer.model.RepositoriesModel
@@ -21,7 +22,8 @@ class RepositoriesFragment : Fragment() {
         fragmentRepositoriesBinding = FragmentRepositoriesBinding.inflate(layoutInflater)
 
         repositories = arguments?.getParcelable<RepositoriesModel>("repositories") ?: RepositoriesModel()
-        repositoriesAdapter = RepositoriesAdapter(repositories)
+        fragmentRepositoriesBinding.repoHeader.text = "${getString(R.string.repositories)} (${repositories.size})"
+        repositoriesAdapter = RepositoriesAdapter(requireContext(), repositories)
 
         return fragmentRepositoriesBinding.root
     }

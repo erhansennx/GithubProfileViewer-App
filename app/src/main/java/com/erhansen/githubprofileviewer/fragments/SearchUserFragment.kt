@@ -47,6 +47,7 @@ class SearchUserFragment : Fragment() {
                 if (actionId == EditorInfo.IME_ACTION_DONE) {
                     if (!searchUser.text.isNullOrEmpty()) {
                         userProgress.visibility = View.VISIBLE
+                        searchUser.clearFocus()
                         searchUserLayout.boxBackgroundColor = ContextCompat.getColor(requireActivity(),
                             R.color.transparent
                         )
