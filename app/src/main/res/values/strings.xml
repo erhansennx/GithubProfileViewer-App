@@ -19,4 +19,5 @@
     <string name="language">Language</string>
     <string name="star">star</string>
     <string name="repositories">Repositories</string>
+    <string name="review">Start searching for the user whose profile you want to review.</string>
 </resources>
