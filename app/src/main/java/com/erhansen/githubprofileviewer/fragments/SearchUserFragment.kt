@@ -22,7 +22,9 @@ import retrofit2.Response
 
 class SearchUserFragment : Fragment() {
 
-
+    private var name: String ?= null
+    private var username: String ?= null
+    private var avatarURL: String ?= null
     private lateinit var fragmentSearchUserBinding: FragmentSearchUserBinding
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
@@ -62,11 +64,14 @@ class SearchUserFragment : Fragment() {
                                 userNotFound.visibility = View.GONE
                                 showRepoProgress.visibility = View.GONE
                                 nullViewCheck(result)
-                                Glide.with(requireActivity()).load(result.body()!!.avatarUrl).centerCrop().placeholder(
+                                name = result.body()!!.name
+                                username = result.body()!!.login
+                                avatarURL = result.body()!!.avatarUrl
+                                Glide.with(requireActivity()).load(avatarURL).centerCrop().placeholder(
                                     R.drawable.ic_launcher_background
                                 ).into(profilePhoto)
-                                nameText.text = result.body()!!.name
-                                usernameText.text = result.body()!!.login
+                                nameText.text = name
+                                usernameText.text = username
                                 biographyText.text = result.body()?.bio
                                 followerText.text = "${result.body()!!.followers} followers · ${result.body()!!.following} following"
                                 locationText.text = result.body()?.location
@@ -107,8 +112,11 @@ class SearchUserFragment : Fragment() {
                     if (getRepositories.isSuccessful) {
                         val bundle = Bundle()
                         bundle.putParcelable("repositories", getRepositories.body())
+                        bundle.putString("name", name)
+                        bundle.putString("username", username)
+                        bundle.putString("avatarURL", avatarURL)
                         val createFragment = CreateFragment(requireActivity() as AppCompatActivity, RepositoriesFragment(), bundle)
-                        searchUser.text = null
+                        //searchUser.text = null
                     }
                     showRepoProgress.visibility = View.VISIBLE
                 }

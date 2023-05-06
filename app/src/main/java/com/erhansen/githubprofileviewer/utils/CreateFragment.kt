@@ -11,7 +11,7 @@ class CreateFragment(appCompatActivity: AppCompatActivity, targetFragment: Fragm
     init {
         val fragmentTransaction = appCompatActivity.supportFragmentManager.beginTransaction()
         if (bundle != null) targetFragment.arguments = bundle
-        fragmentTransaction.replace(R.id.fragmentContainer, targetFragment, null).commit()
+        fragmentTransaction.replace(R.id.fragmentContainer, targetFragment, null).addToBackStack(null).commit()
     }
 
 }

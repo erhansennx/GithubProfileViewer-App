@@ -5,22 +5,115 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical">
 
-    <TextView
-        android:id="@+id/repoHeader"
+    <Toolbar
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/github_gray">
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@drawable/github"
+            android:layout_gravity="center"
+            android:backgroundTint="@color/white"/>
+    </Toolbar>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="25dp"
+        android:layout_marginHorizontal="15dp"
+        android:orientation="horizontal">
+
+        <de.hdodenhof.circleimageview.CircleImageView
+            android:id="@+id/profilePhoto"
+            android:layout_width="65dp"
+            android:layout_height="65dp"
+            android:src="@drawable/ic_launcher_background" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginStart="15dp"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/nameText"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/poppinsmedium"
+                android:hint="@string/name_surname"
+                android:textColor="@color/black"
+                android:textSize="15sp" />
+
+            <TextView
+                android:id="@+id/usernameText"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/poppinslight"
+                android:hint="@string/username"
+                android:textSize="12sp" />
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+    <LinearLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/repositories"
-        android:textColor="@color/black"
-        android:fontFamily="@font/poppinsmedium"
-        android:layout_marginTop="25dp"
-        android:layout_marginStart="15dp"
-        android:textSize="24sp"/>
+        android:orientation="horizontal"
+        android:layout_marginTop="20dp"
+        android:layout_marginStart="15dp">
+
+        <ImageView
+            android:layout_width="22dp"
+            android:layout_height="22dp"
+            android:layout_gravity="center"
+            android:backgroundTint="@color/github_gray"
+            android:background="@drawable/bookmark"/>
+
+        <TextView
+            android:id="@+id/repoHeader"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/repositories"
+            android:textColor="@color/black"
+            android:layout_gravity="center"
+            android:layout_marginStart="10dp"
+            android:fontFamily="sans-serif-medium"
+            android:textSize="18sp"/>
+
+        <TextView
+            android:id="@+id/repoCount"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="12"
+            android:background="@drawable/round_full"
+            android:backgroundTint="@color/transparent"
+            android:paddingStart="20dp"
+            android:paddingEnd="20dp"
+            android:fontFamily="sans-serif-medium"
+            android:textColor="@color/black"
+            android:layout_gravity="center"
+            android:layout_marginStart="10dp"
+            android:textSize="16sp"/>
+
+    </LinearLayout>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="2dp"
+        android:layout_marginTop="5dp"
+        android:background="@drawable/round_full"
+        android:backgroundTint="@color/orange"
+        android:layout_marginHorizontal="15dp"/>
+
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/repoRecycler"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_marginTop="10dp"
+        android:layout_marginTop="15dp"
         app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
         android:layout_marginHorizontal="15dp"/>
 

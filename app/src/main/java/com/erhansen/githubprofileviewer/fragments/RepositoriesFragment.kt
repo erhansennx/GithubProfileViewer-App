@@ -6,6 +6,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
+import com.bumptech.glide.Glide
 import com.erhansen.githubprofileviewer.R
 import com.erhansen.githubprofileviewer.adapter.RepositoriesAdapter
 import com.erhansen.githubprofileviewer.databinding.FragmentRepositoriesBinding
@@ -14,6 +15,9 @@ import com.erhansen.githubprofileviewer.utils.CreateFragment
 
 class RepositoriesFragment : Fragment() {
 
+    private var name: String ?= null
+    private var username: String ?= null
+    private var avatarURL: String ?= null
     private lateinit var repositories: RepositoriesModel
     private lateinit var repositoriesAdapter: RepositoriesAdapter
     private lateinit var fragmentRepositoriesBinding: FragmentRepositoriesBinding
@@ -22,7 +26,14 @@ class RepositoriesFragment : Fragment() {
         fragmentRepositoriesBinding = FragmentRepositoriesBinding.inflate(layoutInflater)
 
         repositories = arguments?.getParcelable<RepositoriesModel>("repositories") ?: RepositoriesModel()
-        fragmentRepositoriesBinding.repoHeader.text = "${getString(R.string.repositories)} (${repositories.size})"
+        name = arguments?.getString("name",null)
+        username = arguments?.getString("username",null)
+        avatarURL = arguments?.getString("avatarURL",null)
+        fragmentRepositoriesBinding.repoHeader.text = "${getString(R.string.repositories)}"
+        fragmentRepositoriesBinding.repoCount.text = "${repositories.size}"
+        Glide.with(requireActivity()).load(avatarURL).centerCrop().placeholder(R.drawable.ic_launcher_background).into(fragmentRepositoriesBinding.profilePhoto)
+        fragmentRepositoriesBinding.nameText.text = name
+        fragmentRepositoriesBinding.usernameText.text = username
         repositoriesAdapter = RepositoriesAdapter(requireContext(), repositories)
 
         return fragmentRepositoriesBinding.root
