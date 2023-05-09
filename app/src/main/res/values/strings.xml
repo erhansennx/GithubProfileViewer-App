@@ -20,4 +20,7 @@
     <string name="star">star</string>
     <string name="repositories">Repositories</string>
     <string name="review">Start searching for the user whose profile you want to review.</string>
+    <string name="ooops">Ooops!</string>
+    <string name="internet_problem">There was a problem with your internet connection, please try again.</string>
+    <string name="okay">Okay</string>
 </resources>

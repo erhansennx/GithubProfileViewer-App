@@ -7,6 +7,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.view.inputmethod.EditorInfo
 import android.view.inputmethod.InputMethodManager
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
@@ -17,6 +18,7 @@ import com.erhansen.githubprofileviewer.model.UserProfileModel
 import com.erhansen.githubprofileviewer.service.UserProfileApi
 import com.erhansen.githubprofileviewer.service.UserProfileApiService
 import com.erhansen.githubprofileviewer.utils.CreateFragment
+import com.erhansen.githubprofileviewer.utils.NetworkController
 import kotlinx.coroutines.*
 import retrofit2.Response
 
@@ -47,54 +49,59 @@ class SearchUserFragment : Fragment() {
         with(fragmentSearchUserBinding) {
             searchUser.setOnEditorActionListener { v, actionId, event ->
                 if (actionId == EditorInfo.IME_ACTION_DONE) {
-                    if (!searchUser.text.isNullOrEmpty()) {
-                        userProgress.visibility = View.VISIBLE
-                        searchUser.clearFocus()
-                        searchUserLayout.boxBackgroundColor = ContextCompat.getColor(requireActivity(),
-                            R.color.transparent
-                        )
-                        CoroutineScope(Dispatchers.Main).launch {
-
-                            val result = withContext(Dispatchers.IO) {
-                                userProfileApi.getUserInformation(searchUser.text.toString())
-                            }
-
-                            if (result.isSuccessful) {
-                                userProfileLayout.visibility = View.VISIBLE
-                                userNotFound.visibility = View.GONE
-                                showRepoProgress.visibility = View.GONE
-                                nullViewCheck(result)
-                                name = result.body()!!.name
-                                username = result.body()!!.login
-                                avatarURL = result.body()!!.avatarUrl
-                                Glide.with(requireActivity()).load(avatarURL).centerCrop().placeholder(
-                                    R.drawable.ic_launcher_background
-                                ).into(profilePhoto)
-                                nameText.text = name
-                                usernameText.text = username
-                                biographyText.text = result.body()?.bio
-                                followerText.text = "${result.body()!!.followers} followers · ${result.body()!!.following} following"
-                                locationText.text = result.body()?.location
-                                emailText.text = result.body()?.email.toString()
-                                companyText.text = result.body()?.company.toString()
-                                twitterText.text = result.body()?.twitterUsername.toString()
-                                linkText.text = result.body()?.blog
-                                userProgress.visibility = View.GONE
-                            } else if (result.code() == 404) {
-                                // user not found!
-                                userProfileLayout.visibility = View.GONE
-                                userNotFound.visibility = View.VISIBLE
-                                userNotFoundText.text = "${getString(R.string.user_not_found)} '${searchUser.text}'"
-                            }
-                            userProgress.visibility = View.GONE
+                    if (NetworkController.isNetworkAvailable(requireContext())) {
+                        if (!searchUser.text.isNullOrEmpty()) {
+                            userProgress.visibility = View.VISIBLE
+                            searchUser.clearFocus()
                             searchUserLayout.boxBackgroundColor = ContextCompat.getColor(requireActivity(),
-                                R.color.white
+                                R.color.transparent
                             )
+                            CoroutineScope(Dispatchers.Main).launch {
+
+                                val result = withContext(Dispatchers.IO) {
+                                    userProfileApi.getUserInformation(searchUser.text.toString())
+                                }
+
+                                if (result.isSuccessful) {
+                                    userProfileLayout.visibility = View.VISIBLE
+                                    userNotFound.visibility = View.GONE
+                                    showRepoProgress.visibility = View.GONE
+                                    nullViewCheck(result)
+                                    name = result.body()!!.name
+                                    username = result.body()!!.login
+                                    avatarURL = result.body()!!.avatarUrl
+                                    Glide.with(requireActivity()).load(avatarURL).centerCrop().placeholder(
+                                        R.drawable.ic_launcher_background
+                                    ).into(profilePhoto)
+                                    nameText.text = name
+                                    usernameText.text = username
+                                    biographyText.text = result.body()?.bio
+                                    followerText.text = "${result.body()!!.followers} followers · ${result.body()!!.following} following"
+                                    locationText.text = result.body()?.location
+                                    emailText.text = result.body()?.email.toString()
+                                    companyText.text = result.body()?.company.toString()
+                                    twitterText.text = result.body()?.twitterUsername.toString()
+                                    linkText.text = result.body()?.blog
+                                    userProgress.visibility = View.GONE
+                                } else if (result.code() == 404) {
+                                    // user not found!
+                                    userProfileLayout.visibility = View.GONE
+                                    userNotFound.visibility = View.VISIBLE
+                                    userNotFoundText.text = "${getString(R.string.user_not_found)} '${searchUser.text}'"
+                                }
+                                userProgress.visibility = View.GONE
+                                searchUserLayout.boxBackgroundColor = ContextCompat.getColor(requireActivity(),
+                                    R.color.white
+                                )
+                            }
+                            //runBlocking {//globalscope.launch {} exception :  Only the original thread that created a view hierarchy can touch its views. }
                         }
-                        //runBlocking {//globalscope.launch {} exception :  Only the original thread that created a view hierarchy can touch its views. }
+                        val imm = requireActivity().getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
+                        imm.hideSoftInputFromWindow(searchUser.windowToken, 0)
+                    } else {
+                        NetworkController.showLayout(requireContext())
                     }
-                    val imm = requireActivity().getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
-                    imm.hideSoftInputFromWindow(searchUser.windowToken, 0)
+
                     return@setOnEditorActionListener true
                 } else {
                     return@setOnEditorActionListener false
