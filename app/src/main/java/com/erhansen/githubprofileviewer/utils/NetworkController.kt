@@ -25,6 +25,7 @@ object NetworkController {
         val okayButton = view.findViewById<Button>(R.id.okayButton)
         builder.setView(view)
         alertDialog = builder.create()
+        alertDialog.setCancelable(false)
         alertDialog.show()
         okayButton.setOnClickListener {
             alertDialog.dismiss()

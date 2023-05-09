@@ -44,6 +44,9 @@ class RepositoriesFragment : Fragment() {
 
         with(fragmentRepositoriesBinding) {
             repoRecycler.adapter = repositoriesAdapter
+            backButton.setOnClickListener {
+                val createFragment = CreateFragment(requireActivity() as AppCompatActivity, SearchUserFragment(), null)
+            }
         }
 
     }

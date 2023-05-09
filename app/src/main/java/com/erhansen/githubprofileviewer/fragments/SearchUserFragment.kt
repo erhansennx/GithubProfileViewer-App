@@ -112,20 +112,24 @@ class SearchUserFragment : Fragment() {
 
             showRepositories.setOnClickListener {
                 showRepoProgress.visibility = View.VISIBLE
-                CoroutineScope(Dispatchers.Main).launch { // runBlocking {} made a delay?
-                    val getRepositories =  withContext(Dispatchers.IO) {
-                        userProfileApi.getUserRepositories(searchUser.text.toString())
+                if (NetworkController.isNetworkAvailable(requireContext())) {
+                    CoroutineScope(Dispatchers.Main).launch { // runBlocking {} made a delay?
+                        val getRepositories =  withContext(Dispatchers.IO) {
+                            userProfileApi.getUserRepositories(searchUser.text.toString())
+                        }
+                        if (getRepositories.isSuccessful) {
+                            val bundle = Bundle()
+                            bundle.putParcelable("repositories", getRepositories.body())
+                            bundle.putString("name", name)
+                            bundle.putString("username", username)
+                            bundle.putString("avatarURL", avatarURL)
+                            val createFragment = CreateFragment(requireActivity() as AppCompatActivity, RepositoriesFragment(), bundle)
+                            //searchUser.text = null
+                        }
                     }
-                    if (getRepositories.isSuccessful) {
-                        val bundle = Bundle()
-                        bundle.putParcelable("repositories", getRepositories.body())
-                        bundle.putString("name", name)
-                        bundle.putString("username", username)
-                        bundle.putString("avatarURL", avatarURL)
-                        val createFragment = CreateFragment(requireActivity() as AppCompatActivity, RepositoriesFragment(), bundle)
-                        //searchUser.text = null
-                    }
-                    showRepoProgress.visibility = View.VISIBLE
+                } else {
+                    NetworkController.showLayout(requireContext())
+                    showRepoProgress.visibility = View.INVISIBLE
                 }
             }
 
