@@ -7,7 +7,6 @@ import android.view.View
 import android.view.ViewGroup
 import android.view.inputmethod.EditorInfo
 import android.view.inputmethod.InputMethodManager
-import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
@@ -123,7 +122,7 @@ class SearchUserFragment : Fragment() {
                             bundle.putString("name", name)
                             bundle.putString("username", username)
                             bundle.putString("avatarURL", avatarURL)
-                            val createFragment = CreateFragment(requireActivity() as AppCompatActivity, RepositoriesFragment(), bundle)
+                            val createFragment = CreateFragment(requireActivity() as AppCompatActivity, OverviewFragment(), bundle)
                             //searchUser.text = null
                         }
                     }
