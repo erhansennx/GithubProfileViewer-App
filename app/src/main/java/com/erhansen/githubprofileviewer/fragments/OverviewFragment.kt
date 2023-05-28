@@ -6,9 +6,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
-import androidx.viewpager.widget.ViewPager
 import androidx.viewpager2.widget.ViewPager2
-import androidx.viewpager2.widget.ViewPager2.OnPageChangeCallback
 import com.bumptech.glide.Glide
 import com.erhansen.githubprofileviewer.R
 import com.erhansen.githubprofileviewer.adapter.RepositoriesAdapter
@@ -27,10 +25,10 @@ class OverviewFragment : Fragment() {
     private lateinit var repositories: RepositoriesModel
     private lateinit var repositoriesAdapter: RepositoriesAdapter
     private lateinit var viewPagerAdapter: ViewPagerAdapter
-    private lateinit var fragmentRepositoriesBinding: FragmentOverviewBinding
+    private lateinit var fragmentOverviewBinding: FragmentOverviewBinding
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
-        fragmentRepositoriesBinding = FragmentOverviewBinding.inflate(layoutInflater)
+        fragmentOverviewBinding = FragmentOverviewBinding.inflate(layoutInflater)
 
         repositories = arguments?.getParcelable<RepositoriesModel>("repositories") ?: RepositoriesModel()
         viewPagerAdapter = ViewPagerAdapter(requireActivity())
@@ -39,18 +37,18 @@ class OverviewFragment : Fragment() {
         avatarURL = arguments?.getString("avatarURL",null)
         //fragmentRepositoriesBinding.repoHeader.text = "${getString(R.string.repositories)}"
         //fragmentRepositoriesBinding.repoCount.text = "${repositories.size}"
-        Glide.with(requireActivity()).load(avatarURL).centerCrop().placeholder(R.drawable.ic_launcher_background).into(fragmentRepositoriesBinding.profilePhoto)
-        fragmentRepositoriesBinding.nameText.text = name
-        fragmentRepositoriesBinding.usernameText.text = username
+        Glide.with(requireActivity()).load(avatarURL).centerCrop().placeholder(R.drawable.ic_launcher_background).into(fragmentOverviewBinding.profilePhoto)
+        fragmentOverviewBinding.nameText.text = name
+        fragmentOverviewBinding.usernameText.text = username
         repositoriesAdapter = RepositoriesAdapter(requireContext(), repositories)
 
-        return fragmentRepositoriesBinding.root
+        return fragmentOverviewBinding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        with(fragmentRepositoriesBinding) {
+        with(fragmentOverviewBinding) {
             //repoRecycler.adapter = repositoriesAdapter
             backButton.setOnClickListener {
                 val createFragment = CreateFragment(requireActivity() as AppCompatActivity, SearchUserFragment(), null)

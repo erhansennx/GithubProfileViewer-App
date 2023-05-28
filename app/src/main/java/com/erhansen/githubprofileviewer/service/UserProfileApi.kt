@@ -15,5 +15,7 @@ interface UserProfileApi {
     suspend fun getUserRepositories(@Path("username") username: String): Response<RepositoriesModel>
     @GET("/users/{username}/followers")
     suspend fun getUserFollowers(@Path("username") username: String): Response<FollowersModel>
+    @GET("/users/{username}/following")
+    suspend fun getUserFollowing(@Path("username") username: String): Response<FollowersModel>
 
 }
