@@ -31,10 +31,10 @@ class OverviewFragment : Fragment() {
         fragmentOverviewBinding = FragmentOverviewBinding.inflate(layoutInflater)
 
         repositories = arguments?.getParcelable<RepositoriesModel>("repositories") ?: RepositoriesModel()
-        viewPagerAdapter = ViewPagerAdapter(requireActivity())
         name = arguments?.getString("name",null)
         username = arguments?.getString("username",null)
         avatarURL = arguments?.getString("avatarURL",null)
+        viewPagerAdapter = ViewPagerAdapter(requireActivity(), username.toString())
         //fragmentRepositoriesBinding.repoHeader.text = "${getString(R.string.repositories)}"
         //fragmentRepositoriesBinding.repoCount.text = "${repositories.size}"
         Glide.with(requireActivity()).load(avatarURL).centerCrop().placeholder(R.drawable.ic_launcher_background).into(fragmentOverviewBinding.profilePhoto)

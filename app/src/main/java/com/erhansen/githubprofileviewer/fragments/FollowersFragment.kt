@@ -26,6 +26,7 @@ class FollowersFragment : Fragment() {
         fragmentFollowersBinding = FragmentFollowersBinding.inflate(layoutInflater)
 
         followersList = ArrayList()
+        userName = arguments?.getString("username", null).toString()
 
         return fragmentFollowersBinding.root
     }
@@ -42,7 +43,7 @@ class FollowersFragment : Fragment() {
             CoroutineScope(Dispatchers.Main).launch {
 
                 val followers = withContext(Dispatchers.IO) {
-                    userProfileApi.getUserFollowers("erhansennx")
+                    userProfileApi.getUserFollowers(userName)
                 }
 
                 if (followers.isSuccessful) {

@@ -8,21 +8,42 @@ import com.erhansen.githubprofileviewer.fragments.FollowersFragment
 import com.erhansen.githubprofileviewer.fragments.FollowingFragment
 import com.erhansen.githubprofileviewer.fragments.RepositoriesFragment
 
-class ViewPagerAdapter(fragmentActivity: FragmentActivity) :
+class ViewPagerAdapter(fragmentActivity: FragmentActivity, private val username: String) :
     FragmentStateAdapter(fragmentActivity) {
 
+    private var bundle = Bundle()
 
     override fun getItemCount(): Int {
         return 3
     }
 
     override fun createFragment(position: Int): Fragment {
-        return when(position) {
-            0 -> FollowersFragment()
-            1 -> FollowingFragment()
-            2 -> RepositoriesFragment()
-            else -> FollowersFragment()
+
+        bundle.putString("username", username)
+
+        when (position) {
+            0 -> {
+                val followersFragment = FollowersFragment()
+                followersFragment.arguments = bundle
+                return followersFragment
+            }
+            1 -> {
+                val followingFragment = FollowingFragment()
+                followingFragment.arguments = bundle
+                return followingFragment
+            }
+            2 -> {
+                val repositoriesFragment = RepositoriesFragment()
+                repositoriesFragment.arguments = bundle
+                return repositoriesFragment
+            }
+            else -> {
+                val followersFragment = FollowersFragment()
+                followersFragment.arguments = bundle
+                return followersFragment
+            }
         }
+
     }
 
 }
