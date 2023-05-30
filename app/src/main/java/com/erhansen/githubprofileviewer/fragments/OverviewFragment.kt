@@ -22,25 +22,19 @@ class OverviewFragment : Fragment() {
     private var name: String ?= null
     private var username: String ?= null
     private var avatarURL: String ?= null
-    private lateinit var repositories: RepositoriesModel
-    private lateinit var repositoriesAdapter: RepositoriesAdapter
     private lateinit var viewPagerAdapter: ViewPagerAdapter
     private lateinit var fragmentOverviewBinding: FragmentOverviewBinding
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         fragmentOverviewBinding = FragmentOverviewBinding.inflate(layoutInflater)
 
-        repositories = arguments?.getParcelable<RepositoriesModel>("repositories") ?: RepositoriesModel()
         name = arguments?.getString("name",null)
         username = arguments?.getString("username",null)
         avatarURL = arguments?.getString("avatarURL",null)
         viewPagerAdapter = ViewPagerAdapter(requireActivity(), username.toString())
-        //fragmentRepositoriesBinding.repoHeader.text = "${getString(R.string.repositories)}"
-        //fragmentRepositoriesBinding.repoCount.text = "${repositories.size}"
         Glide.with(requireActivity()).load(avatarURL).centerCrop().placeholder(R.drawable.ic_launcher_background).into(fragmentOverviewBinding.profilePhoto)
         fragmentOverviewBinding.nameText.text = name
         fragmentOverviewBinding.usernameText.text = username
-        repositoriesAdapter = RepositoriesAdapter(requireContext(), repositories)
 
         return fragmentOverviewBinding.root
     }

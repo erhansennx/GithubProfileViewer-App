@@ -112,20 +112,11 @@ class SearchUserFragment : Fragment() {
             showRepositories.setOnClickListener {
                 showRepoProgress.visibility = View.VISIBLE
                 if (NetworkController.isNetworkAvailable(requireContext())) {
-                    CoroutineScope(Dispatchers.Main).launch { // runBlocking {} made a delay?
-                        val getRepositories =  withContext(Dispatchers.IO) {
-                            userProfileApi.getUserRepositories(searchUser.text.toString())
-                        }
-                        if (getRepositories.isSuccessful) {
-                            val bundle = Bundle()
-                            bundle.putParcelable("repositories", getRepositories.body())
-                            bundle.putString("name", name)
-                            bundle.putString("username", username)
-                            bundle.putString("avatarURL", avatarURL)
-                            val createFragment = CreateFragment(requireActivity() as AppCompatActivity, OverviewFragment(), bundle)
-                            //searchUser.text = null
-                        }
-                    }
+                    val bundle = Bundle()
+                    bundle.putString("name", name)
+                    bundle.putString("username", username)
+                    bundle.putString("avatarURL", avatarURL)
+                    val createFragment = CreateFragment(requireActivity() as AppCompatActivity, OverviewFragment(), bundle)
                 } else {
                     NetworkController.showLayout(requireContext())
                     showRepoProgress.visibility = View.INVISIBLE
