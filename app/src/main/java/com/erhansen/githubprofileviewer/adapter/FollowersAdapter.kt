@@ -6,6 +6,7 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ProgressBar
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import androidx.recyclerview.widget.RecyclerView.Recycler
@@ -15,6 +16,7 @@ import com.erhansen.githubprofileviewer.R
 import com.erhansen.githubprofileviewer.model.FollowersModel
 import com.erhansen.githubprofileviewer.service.UserProfileApi
 import com.erhansen.githubprofileviewer.service.UserProfileApiService
+import com.erhansen.githubprofileviewer.utils.BottomDialogHelper
 import com.google.android.material.bottomsheet.BottomSheetDialog
 import de.hdodenhof.circleimageview.CircleImageView
 import kotlinx.coroutines.CoroutineScope
@@ -46,7 +48,7 @@ class FollowersAdapter(private val context: Context, private val followersList: 
         holder.followingUserName.text = followersList[position].login
         holder.itemView.setOnClickListener {
 
-            showBottomDialog()
+            BottomDialogHelper.bottomDialogInit(context)
             githubUserAPI = UserProfileApiService.getInstance().create(UserProfileApi::class.java)
 
             CoroutineScope(Dispatchers.Main).launch {
@@ -55,13 +57,7 @@ class FollowersAdapter(private val context: Context, private val followersList: 
                 }
 
                 if (userProfile.isSuccessful) {
-                    //repoProgressBar.visibility = View.GONE
-                    //repositoriesAdapter = RepositoriesAdapter(requireContext(), repositories.body()!!)
-                    //repositoriesRecyclerView.adapter = repositoriesAdapter
-                    Log.d("ilker", "Name : ${userProfile.body()?.name}")
-                    Log.d("ilker", "Bio : ${userProfile.body()?.bio}")
-                    Log.d("ilker", "Location : ${userProfile.body()?.location}")
-
+                    BottomDialogHelper.showUserData(userProfile)
                 }
             }
 
@@ -70,14 +66,7 @@ class FollowersAdapter(private val context: Context, private val followersList: 
     }
 
 
-    private fun showBottomDialog() {
-        val bottomSheetDialog = BottomSheetDialog(context)
-        val layoutInflater = LayoutInflater.from(context)
-        val view = layoutInflater.inflate(R.layout.bottom_sheet_profile, null)
 
-        bottomSheetDialog.setContentView(view)
-        bottomSheetDialog.show()
-    }
 
 
 }

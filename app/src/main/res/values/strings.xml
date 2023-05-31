@@ -24,4 +24,5 @@
     <string name="internet_problem">There was a problem with your internet connection, please try again.</string>
     <string name="okay">Okay</string>
     <string name="following">Following</string>
+    <string name="show_profile">Show Profile</string>
 </resources>
