@@ -1,6 +1,8 @@
 package com.erhansen.githubprofileviewer.adapter
 
+import android.annotation.SuppressLint
 import android.content.Context
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -11,10 +13,18 @@ import androidx.recyclerview.widget.RecyclerView.ViewHolder
 import com.bumptech.glide.Glide
 import com.erhansen.githubprofileviewer.R
 import com.erhansen.githubprofileviewer.model.FollowersModel
+import com.erhansen.githubprofileviewer.service.UserProfileApi
+import com.erhansen.githubprofileviewer.service.UserProfileApiService
+import com.google.android.material.bottomsheet.BottomSheetDialog
 import de.hdodenhof.circleimageview.CircleImageView
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 
 class FollowersAdapter(private val context: Context, private val followersList: FollowersModel) : RecyclerView.Adapter<FollowersAdapter.ItemHolder>() {
 
+    private lateinit var githubUserAPI: UserProfileApi
 
     class ItemHolder(itemView: View) : ViewHolder(itemView) {
         val followersProfileImage: CircleImageView = itemView.findViewById(R.id.followersProfileImage)
@@ -34,7 +44,39 @@ class FollowersAdapter(private val context: Context, private val followersList: 
         Glide.with(context).load(followersList[position].avatarUrl).centerCrop()
             .placeholder(R.drawable.ic_launcher_background).into(holder.followersProfileImage)
         holder.followingUserName.text = followersList[position].login
+        holder.itemView.setOnClickListener {
 
+            showBottomDialog()
+            githubUserAPI = UserProfileApiService.getInstance().create(UserProfileApi::class.java)
+
+            CoroutineScope(Dispatchers.Main).launch {
+                val userProfile = withContext(Dispatchers.IO) {
+                    githubUserAPI.getUserInformation(followersList[position].login)
+                }
+
+                if (userProfile.isSuccessful) {
+                    //repoProgressBar.visibility = View.GONE
+                    //repositoriesAdapter = RepositoriesAdapter(requireContext(), repositories.body()!!)
+                    //repositoriesRecyclerView.adapter = repositoriesAdapter
+                    Log.d("ilker", "Name : ${userProfile.body()?.name}")
+                    Log.d("ilker", "Bio : ${userProfile.body()?.bio}")
+                    Log.d("ilker", "Location : ${userProfile.body()?.location}")
+
+                }
+            }
+
+        }
+
+    }
+
+
+    private fun showBottomDialog() {
+        val bottomSheetDialog = BottomSheetDialog(context)
+        val layoutInflater = LayoutInflater.from(context)
+        val view = layoutInflater.inflate(R.layout.bottom_sheet_profile, null)
+
+        bottomSheetDialog.setContentView(view)
+        bottomSheetDialog.show()
     }
 
 
