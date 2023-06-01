@@ -116,7 +116,8 @@ class SearchUserFragment : Fragment() {
                     bundle.putString("name", name)
                     bundle.putString("username", username)
                     bundle.putString("avatarURL", avatarURL)
-                    val createFragment = CreateFragment(requireActivity() as AppCompatActivity, OverviewFragment(), bundle)
+                    //val createFragment = CreateFragment(requireActivity() as AppCompatActivity, OverviewFragment(), bundle)
+                    CreateFragment.create(requireActivity() as AppCompatActivity, OverviewFragment(), bundle)
                 } else {
                     NetworkController.showLayout(requireContext())
                     showRepoProgress.visibility = View.INVISIBLE

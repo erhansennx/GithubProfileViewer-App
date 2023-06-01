@@ -45,7 +45,8 @@ class OverviewFragment : Fragment() {
         with(fragmentOverviewBinding) {
             //repoRecycler.adapter = repositoriesAdapter
             backButton.setOnClickListener {
-                val createFragment = CreateFragment(requireActivity() as AppCompatActivity, SearchUserFragment(), null)
+                //val createFragment = CreateFragment(requireActivity() as AppCompatActivity, SearchUserFragment(), null)
+                CreateFragment.create(requireActivity() as AppCompatActivity, SearchUserFragment(), null)
             }
 
             viewPager.adapter = viewPagerAdapter

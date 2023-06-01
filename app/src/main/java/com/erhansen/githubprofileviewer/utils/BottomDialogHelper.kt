@@ -2,13 +2,16 @@ package com.erhansen.githubprofileviewer.utils
 
 import android.annotation.SuppressLint
 import android.content.Context
+import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.widget.LinearLayout
 import android.widget.ProgressBar
 import android.widget.TextView
+import androidx.appcompat.app.AppCompatActivity
 import com.bumptech.glide.Glide
 import com.erhansen.githubprofileviewer.R
+import com.erhansen.githubprofileviewer.fragments.OverviewFragment
 import com.erhansen.githubprofileviewer.model.UserProfileModel
 import com.google.android.material.bottomsheet.BottomSheetDialog
 import de.hdodenhof.circleimageview.CircleImageView
@@ -24,6 +27,7 @@ object BottomDialogHelper {
     private lateinit var context: Context
     private lateinit var loadProgress: ProgressBar
     private lateinit var profileImage: CircleImageView
+    private lateinit var avatarURL: String
     private lateinit var nameText: TextView
     private lateinit var usernameText: TextView
     private lateinit var biographyText: TextView
@@ -57,6 +61,16 @@ object BottomDialogHelper {
         showRepositories = view.findViewById(R.id.showRepositories)
         showRepoProgress = view.findViewById(R.id.showRepoProgress)
 
+        showRepositories.setOnClickListener {
+            val bundle = Bundle()
+            bundle.putString("name", nameText.text.toString())
+            bundle.putString("username", usernameText.text.toString())
+            bundle.putString("avatarURL", avatarURL)
+            //val createFragment = CreateFragment(context as AppCompatActivity, OverviewFragment(), bundle)
+            CreateFragment.create(context as AppCompatActivity, OverviewFragment(), bundle)
+            bottomSheetDialog.cancel()
+        }
+
         bottomSheetDialog.setContentView(view)
         bottomSheetDialog.show()
     }
@@ -65,7 +79,8 @@ object BottomDialogHelper {
         nullViewCheck(user)
         loadProgress.visibility = View.GONE
         userProfileLayout.visibility = View.VISIBLE
-        Glide.with(context).load(user.body()?.avatarUrl).centerCrop().placeholder(
+        avatarURL = user.body()?.avatarUrl.toString()
+        Glide.with(context).load(avatarURL).centerCrop().placeholder(
             R.drawable.ic_launcher_background
         ).into(profileImage)
         nameText.text = user.body()?.name

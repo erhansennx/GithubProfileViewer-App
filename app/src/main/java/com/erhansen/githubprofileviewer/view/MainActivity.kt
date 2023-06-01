@@ -20,7 +20,8 @@ class MainActivity : AppCompatActivity() {
         activityMainBinding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(activityMainBinding.root)
 
-        val createFragment = CreateFragment(this@MainActivity, SearchUserFragment(), null)
+        //val createFragment = CreateFragment(this@MainActivity, SearchUserFragment(), null)
+        CreateFragment.create(this@MainActivity, SearchUserFragment(), null)
 
     }
 
