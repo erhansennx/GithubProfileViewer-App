@@ -36,7 +36,7 @@ class FollowingAdapter(private val context: Context, private val followingList: 
 
     override fun onBindViewHolder(holder: FollowingAdapter.ItemHolder, position: Int) {
         Glide.with(context).load(followingList[position].avatarUrl).centerCrop()
-            .placeholder(R.drawable.ic_launcher_background).into(holder.followersProfileImage)
+            .placeholder(R.drawable.glide_loading).into(holder.followersProfileImage)
         holder.followingUserName.text = followingList[position].login
         holder.itemView.setOnClickListener {
 

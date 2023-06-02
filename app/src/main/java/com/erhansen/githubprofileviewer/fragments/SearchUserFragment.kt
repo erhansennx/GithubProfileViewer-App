@@ -70,7 +70,7 @@ class SearchUserFragment : Fragment() {
                                     username = result.body()!!.login
                                     avatarURL = result.body()!!.avatarUrl
                                     Glide.with(requireActivity()).load(avatarURL).centerCrop().placeholder(
-                                        R.drawable.ic_launcher_background
+                                        R.drawable.glide_loading
                                     ).into(profilePhoto)
                                     nameText.text = name
                                     usernameText.text = username

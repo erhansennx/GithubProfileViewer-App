@@ -1,15 +1,10 @@
 package com.erhansen.githubprofileviewer.view
 
-import android.content.IntentFilter
-import android.net.ConnectivityManager
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import com.erhansen.githubprofileviewer.databinding.ActivityMainBinding
 import com.erhansen.githubprofileviewer.fragments.SearchUserFragment
 import com.erhansen.githubprofileviewer.utils.CreateFragment
-import com.erhansen.githubprofileviewer.utils.NetworkController
-import kotlinx.coroutines.*
-import retrofit2.Response
 
 class MainActivity : AppCompatActivity() {
 

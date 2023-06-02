@@ -32,7 +32,7 @@ class OverviewFragment : Fragment() {
         username = arguments?.getString("username",null)
         avatarURL = arguments?.getString("avatarURL",null)
         viewPagerAdapter = ViewPagerAdapter(requireActivity(), username.toString())
-        Glide.with(requireActivity()).load(avatarURL).centerCrop().placeholder(R.drawable.ic_launcher_background).into(fragmentOverviewBinding.profilePhoto)
+        Glide.with(requireActivity()).load(avatarURL).centerCrop().placeholder(R.drawable.glide_loading).into(fragmentOverviewBinding.profilePhoto)
         fragmentOverviewBinding.nameText.text = name
         fragmentOverviewBinding.usernameText.text = username
 
