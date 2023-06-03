@@ -25,4 +25,5 @@
     <string name="okay">Okay</string>
     <string name="following">Following</string>
     <string name="show_profile">Show Profile</string>
+    <string name="no_followers">doesn\'t have any followers yet.</string>
 </resources>

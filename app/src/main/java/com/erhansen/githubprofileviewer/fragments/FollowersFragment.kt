@@ -5,6 +5,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import com.erhansen.githubprofileviewer.R
 import com.erhansen.githubprofileviewer.adapter.FollowersAdapter
 import com.erhansen.githubprofileviewer.databinding.FragmentFollowersBinding
 import com.erhansen.githubprofileviewer.model.FollowersModel
@@ -48,8 +49,14 @@ class FollowersFragment : Fragment() {
 
                 if (followers.isSuccessful) {
                     progressBar.visibility = View.GONE
-                    followersAdapter = FollowersAdapter(requireContext(), followers.body()!!)
-                    followersRecyclerView.adapter = followersAdapter
+                    if (followers.body()!!.size > 0) {
+                        followersAdapter = FollowersAdapter(requireContext(), followers.body()!!)
+                        followersRecyclerView.adapter = followersAdapter
+                    } else {
+                        errorFollowersText.visibility = View.VISIBLE
+                        errorFollowersText.text = "$userName ${getString(R.string.no_followers)}"
+                    }
+
                 }
 
             }
