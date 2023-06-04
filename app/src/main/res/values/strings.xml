@@ -26,4 +26,6 @@
     <string name="following">Following</string>
     <string name="show_profile">Show Profile</string>
     <string name="no_followers">doesn\'t have any followers yet.</string>
+    <string name="no_following">doesn\'t have any following yet.</string>
+    <string name="no_repositories">doesn\'t have any public repositories yet.</string>
 </resources>

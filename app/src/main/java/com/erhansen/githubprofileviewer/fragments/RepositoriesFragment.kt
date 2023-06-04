@@ -6,6 +6,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import com.erhansen.githubprofileviewer.R
 import com.erhansen.githubprofileviewer.adapter.FollowingAdapter
 import com.erhansen.githubprofileviewer.adapter.RepositoriesAdapter
 import com.erhansen.githubprofileviewer.databinding.FragmentRepositoriesBinding
@@ -46,8 +47,15 @@ class RepositoriesFragment : Fragment() {
 
                 if (repositories.isSuccessful) {
                     repoProgressBar.visibility = View.GONE
-                    repositoriesAdapter = RepositoriesAdapter(requireContext(), repositories.body()!!)
-                    repositoriesRecyclerView.adapter = repositoriesAdapter
+                    if (repositories.body()!!.size > 0) {
+                        repositoriesAdapter = RepositoriesAdapter(requireContext(), repositories.body()!!)
+                        repositoriesRecyclerView.adapter = repositoriesAdapter
+                    } else {
+                        errorRepositoriesText.visibility = View.VISIBLE
+                        errorRepositoriesText.text = "$username ${getString(R.string.no_repositories)}"
+                    }
+
+
                 }
 
             }
