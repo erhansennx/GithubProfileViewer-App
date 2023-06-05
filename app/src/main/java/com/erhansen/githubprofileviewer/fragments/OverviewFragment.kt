@@ -33,7 +33,8 @@ class OverviewFragment : Fragment() {
         avatarURL = arguments?.getString("avatarURL",null)
         viewPagerAdapter = ViewPagerAdapter(requireActivity(), username.toString())
         Glide.with(requireActivity()).load(avatarURL).centerCrop().placeholder(R.drawable.glide_loading).into(fragmentOverviewBinding.profilePhoto)
-        fragmentOverviewBinding.nameText.text = name
+        if (name.isNullOrEmpty()) fragmentOverviewBinding.nameText.visibility = View.GONE
+        else fragmentOverviewBinding.nameText.text = name
         fragmentOverviewBinding.usernameText.text = username
 
         return fragmentOverviewBinding.root
