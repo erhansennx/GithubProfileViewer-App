@@ -8,9 +8,11 @@ object ColorReader {
 
     fun getColorCode(context:Context, language: String?): String {
         val json = context.assets.open("language_colors.json").bufferedReader().use { it.readText() }
-        if (language != null) {
+        if (!language.isNullOrEmpty()) {
             val jsonObject = JSONObject(json)
-            return jsonObject.optString(language)
+            if (jsonObject.has(language)) {
+                return jsonObject.getString(language)
+            }
         }
         return "#4CAF50"
     }

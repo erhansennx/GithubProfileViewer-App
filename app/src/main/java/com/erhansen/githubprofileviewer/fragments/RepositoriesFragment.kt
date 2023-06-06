@@ -13,6 +13,7 @@ import com.erhansen.githubprofileviewer.databinding.FragmentRepositoriesBinding
 import com.erhansen.githubprofileviewer.model.RepositoriesModel
 import com.erhansen.githubprofileviewer.service.UserProfileApi
 import com.erhansen.githubprofileviewer.service.UserProfileApiService
+import com.erhansen.githubprofileviewer.utils.NetworkController
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
@@ -21,7 +22,6 @@ import kotlinx.coroutines.withContext
 class RepositoriesFragment : Fragment() {
 
     private lateinit var username: String
-    private lateinit var repositories: RepositoriesModel
     private lateinit var repositoriesAdapter: RepositoriesAdapter
     private lateinit var fragmentRepositoriesBinding: FragmentRepositoriesBinding
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
@@ -37,28 +37,33 @@ class RepositoriesFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         with(fragmentRepositoriesBinding) {
-            val userProfileApi = UserProfileApiService.getInstance().create(UserProfileApi::class.java)
 
-            CoroutineScope(Dispatchers.Main).launch {
+            if (NetworkController.isNetworkAvailable(requireContext())) {
+                val userProfileApi = UserProfileApiService.getInstance().create(UserProfileApi::class.java)
 
-                val repositories = withContext(Dispatchers.IO) {
-                    userProfileApi.getUserRepositories(username)
-                }
+                CoroutineScope(Dispatchers.Main).launch {
 
-                if (repositories.isSuccessful) {
-                    repoProgressBar.visibility = View.GONE
-                    if (repositories.body()!!.size > 0) {
-                        repositoriesAdapter = RepositoriesAdapter(requireContext(), repositories.body()!!)
-                        repositoriesRecyclerView.adapter = repositoriesAdapter
-                    } else {
-                        errorRepositoriesText.visibility = View.VISIBLE
-                        errorRepositoriesText.text = "$username ${getString(R.string.no_repositories)}"
+                    val repositories = withContext(Dispatchers.IO) {
+                        userProfileApi.getUserRepositories(username)
                     }
 
+                    if (repositories.isSuccessful) {
+                        repoProgressBar.visibility = View.GONE
+                        if (repositories.body()!!.size > 0) {
+                            repositoriesAdapter = RepositoriesAdapter(requireContext(), repositories.body()!!)
+                            repositoriesRecyclerView.adapter = repositoriesAdapter
+                        } else {
+                            errorRepositoriesText.visibility = View.VISIBLE
+                            errorRepositoriesText.text = "$username ${getString(R.string.no_repositories)}"
+                        }
+                    }
 
                 }
 
+            } else {
+                NetworkController.showLayout(requireContext())
             }
+
         }
 
     }

@@ -11,6 +11,7 @@ import com.erhansen.githubprofileviewer.databinding.FragmentFollowingBinding
 import com.erhansen.githubprofileviewer.model.FollowersModel
 import com.erhansen.githubprofileviewer.service.UserProfileApi
 import com.erhansen.githubprofileviewer.service.UserProfileApiService
+import com.erhansen.githubprofileviewer.utils.NetworkController
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
@@ -39,29 +40,33 @@ class FollowingFragment : Fragment() {
 
         with(fragmentFollowingBinding) {
 
-            val userProfileApi = UserProfileApiService.getInstance().create(UserProfileApi::class.java)
-            val scope = CoroutineScope(Dispatchers.Main)
+            if (NetworkController.isNetworkAvailable(requireContext())) {
+                val userProfileApi = UserProfileApiService.getInstance().create(UserProfileApi::class.java)
 
-            CoroutineScope(Dispatchers.Main).launch {
+                CoroutineScope(Dispatchers.Main).launch {
 
-                val followers = withContext(Dispatchers.IO) {
-                    userProfileApi.getUserFollowing(userName)
-                }
-
-                if (followers.isSuccessful) {
-                    progressBar.visibility = View.GONE
-                    if (followers.body()!!.size > 0) {
-                        followingAdapter = FollowingAdapter(requireContext(), followers.body()!!)
-                        followersRecyclerView.adapter = followingAdapter
-                    } else {
-                        errorFollowingText.visibility = View.VISIBLE
-                        errorFollowingText.text = "$userName ${getString(R.string.no_following)}"
+                    val followers = withContext(Dispatchers.IO) {
+                        userProfileApi.getUserFollowing(userName)
                     }
 
+                    if (followers.isSuccessful) {
+                        progressBar.visibility = View.GONE
+                        if (followers.body()!!.size > 0) {
+                            followingAdapter = FollowingAdapter(requireContext(), followers.body()!!)
+                            followersRecyclerView.adapter = followingAdapter
+                        } else {
+                            errorFollowingText.visibility = View.VISIBLE
+                            errorFollowingText.text = "$userName ${getString(R.string.no_following)}"
+                        }
+                    }
 
                 }
 
+            } else {
+                NetworkController.showLayout(requireContext())
             }
+
+
 
 
         }
