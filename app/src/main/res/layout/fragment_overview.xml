@@ -29,39 +29,56 @@
         android:layout_height="wrap_content"
         android:layout_marginHorizontal="15dp"
         android:layout_marginTop="25dp"
-        android:orientation="horizontal">
-
-        <de.hdodenhof.circleimageview.CircleImageView
-            android:id="@+id/profilePhoto"
-            android:layout_width="65dp"
-            android:layout_height="65dp"
-            android:src="@drawable/ic_launcher_background" />
+        android:orientation="vertical">
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:layout_marginStart="15dp"
-            android:orientation="vertical">
+            android:orientation="horizontal">
 
-            <TextView
-                android:id="@+id/nameText"
+            <de.hdodenhof.circleimageview.CircleImageView
+                android:id="@+id/profilePhoto"
+                android:layout_width="65dp"
+                android:layout_height="65dp"
+                android:src="@drawable/ic_launcher_background" />
+
+            <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:fontFamily="@font/poppinsmedium"
-                android:hint="@string/name_surname"
-                android:textColor="@color/black"
-                android:textSize="15sp" />
+                android:layout_gravity="center"
+                android:layout_marginStart="15dp"
+                android:orientation="vertical">
 
-            <TextView
-                android:id="@+id/usernameText"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:fontFamily="@font/poppinslight"
-                android:hint="@string/username"
-                android:textSize="12sp" />
+                <TextView
+                    android:id="@+id/nameText"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/poppinsmedium"
+                    android:hint="@string/name_surname"
+                    android:textColor="@color/black"
+                    android:textSize="15sp" />
 
+                <TextView
+                    android:id="@+id/usernameText"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/poppinslight"
+                    android:hint="@string/username"
+                    android:textSize="12sp" />
+
+            </LinearLayout>
         </LinearLayout>
+
+        <TextView
+            android:id="@+id/biographyText"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="3dp"
+            android:layout_marginTop="10dp"
+            android:fontFamily="@font/poppinsregular"
+            android:text="@string/short_lorem_ipsum"
+            android:textColor="@color/black"
+            android:textSize="12sp" />
 
     </LinearLayout>
 
@@ -74,28 +91,28 @@
             android:id="@+id/tabLayout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            app:tabTextAppearance="@style/MyTabLayoutTextAppearance"
-            app:tabTextColor="@color/github_gray"
             app:tabIndicatorColor="@color/green"
-            app:tabMode="fixed">
+            app:tabMode="fixed"
+            app:tabTextAppearance="@style/MyTabLayoutTextAppearance"
+            app:tabTextColor="@color/github_gray">
 
             <com.google.android.material.tabs.TabItem
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="@string/followers"
-                android:contentDescription="@string/followers"/>
+                android:contentDescription="@string/followers"
+                android:text="@string/followers" />
 
             <com.google.android.material.tabs.TabItem
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="@string/following"
-                android:contentDescription="@string/following"/>
+                android:contentDescription="@string/following"
+                android:text="@string/following" />
 
             <com.google.android.material.tabs.TabItem
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="@string/repositories"
-                android:contentDescription="@string/repositories"/>
+                android:contentDescription="@string/repositories"
+                android:text="@string/repositories" />
 
 
         </com.google.android.material.tabs.TabLayout>
@@ -104,7 +121,7 @@
             android:id="@+id/viewPager"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_below="@id/tabLayout"/>
+            android:layout_below="@id/tabLayout" />
     </RelativeLayout>
 
 

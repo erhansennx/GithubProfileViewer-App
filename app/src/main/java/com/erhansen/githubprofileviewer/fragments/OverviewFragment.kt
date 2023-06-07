@@ -22,6 +22,7 @@ class OverviewFragment : Fragment() {
     private var name: String ?= null
     private var username: String ?= null
     private var avatarURL: String ?= null
+    private var biography: String ?= null
     private lateinit var viewPagerAdapter: ViewPagerAdapter
     private lateinit var fragmentOverviewBinding: FragmentOverviewBinding
 
@@ -31,11 +32,13 @@ class OverviewFragment : Fragment() {
         name = arguments?.getString("name",null)
         username = arguments?.getString("username",null)
         avatarURL = arguments?.getString("avatarURL",null)
+        biography = arguments?.getString("biography", null)
         viewPagerAdapter = ViewPagerAdapter(requireActivity(), username.toString())
         Glide.with(requireActivity()).load(avatarURL).centerCrop().placeholder(R.drawable.glide_loading).into(fragmentOverviewBinding.profilePhoto)
         if (name.isNullOrEmpty()) fragmentOverviewBinding.nameText.visibility = View.GONE
         else fragmentOverviewBinding.nameText.text = name
         fragmentOverviewBinding.usernameText.text = username
+        fragmentOverviewBinding.biographyText.text = biography
 
         return fragmentOverviewBinding.root
     }

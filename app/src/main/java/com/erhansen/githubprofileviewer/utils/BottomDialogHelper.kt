@@ -66,6 +66,7 @@ object BottomDialogHelper {
             bundle.putString("name", nameText.text.toString())
             bundle.putString("username", usernameText.text.toString())
             bundle.putString("avatarURL", avatarURL)
+            bundle.putString("biography", biographyText.text.toString())
             //val createFragment = CreateFragment(context as AppCompatActivity, OverviewFragment(), bundle)
             CreateFragment.create(context as AppCompatActivity, OverviewFragment(), bundle)
             bottomSheetDialog.cancel()

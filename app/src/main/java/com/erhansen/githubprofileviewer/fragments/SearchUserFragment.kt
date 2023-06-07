@@ -116,6 +116,7 @@ class SearchUserFragment : Fragment() {
                     bundle.putString("name", name)
                     bundle.putString("username", username)
                     bundle.putString("avatarURL", avatarURL)
+                    bundle.putString("biography", biographyText.text.toString())
                     //val createFragment = CreateFragment(requireActivity() as AppCompatActivity, OverviewFragment(), bundle)
                     CreateFragment.create(requireActivity() as AppCompatActivity, OverviewFragment(), bundle)
                 } else {
