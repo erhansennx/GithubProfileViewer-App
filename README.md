@@ -3,10 +3,10 @@
 
 <h2> App Screenshots </h2>
 <img src="https://github.com/erhansennx/GithubProfileViewer-App/assets/77855407/1d2152a1-8503-4d18-88a1-737e6335243e" width=300>
-<img src="https://github.com/erhansennx/GithubProfileViewer-App/assets/77855407/8b131948-fb6b-42bd-b27a-bff00d03c9f7" width=300>
-<img src="https://github.com/erhansennx/GithubProfileViewer-App/assets/77855407/d3552755-cc66-4f95-b608-59d98e2e8481" width=300>
-<img src="https://github.com/erhansennx/GithubProfileViewer-App/assets/77855407/a3b299e9-4201-4083-91ff-b8d15cc898f5" width=300>
-<img src="https://github.com/erhansennx/GithubProfileViewer-App/assets/77855407/f98d09ed-7525-4829-9221-45ff56b6b829" width=300>
-<img src="https://github.com/erhansennx/GithubProfileViewer-App/assets/77855407/0079bb29-9401-4096-baf4-3cac9f1ace3d" width=300>
-<img src="https://github.com/erhansennx/GithubProfileViewer-App/assets/77855407/4fd8a185-9357-4ddb-838a-7b9caa2ad32c" width=300>
-<img src="https://github.com/erhansennx/GithubProfileViewer-App/assets/77855407/e07e2a46-5b4b-4514-aebd-d2d93ab7e5f0" width=300>
+<img src="https://github.com/erhansennx/GithubProfileViewer-App/assets/77855407/31b7cd02-7416-44d1-a37e-05d3aeee605f" width=300>
+<img src="https://github.com/erhansennx/GithubProfileViewer-App/assets/77855407/c4a999f2-0561-4e40-a512-1bfafbcf6b0e" width=300>
+<img src="https://github.com/erhansennx/GithubProfileViewer-App/assets/77855407/4ac22ced-4b97-4806-a4ec-001fba373a80" width=300>
+<img src="https://github.com/erhansennx/GithubProfileViewer-App/assets/77855407/95f1c65e-f304-465c-b981-25db7988ae36" width=300>
+<img src="https://github.com/erhansennx/GithubProfileViewer-App/assets/77855407/f1af9627-fdd7-4ccf-9ed6-03ce298bd875" width=300>
+<img src="https://github.com/erhansennx/GithubProfileViewer-App/assets/77855407/6a778e0a-425b-418a-a23d-c6d38ffce030" width=300>
+<img src="https://github.com/erhansennx/GithubProfileViewer-App/assets/77855407/b0b7504d-5b43-42e5-a3f0-b71d651ffe93" width=300>
