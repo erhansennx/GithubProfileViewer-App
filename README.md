@@ -2,7 +2,7 @@
 
 
 <h2> App Screenshots </h2>
-<img src="https://github.com/erhansennx/GithubProfileViewer-App/assets/77855407/0a9f8c22-08eb-4075-8406-db9b6f4f64c0" width=300>
+<img src="https://github.com/erhansennx/GithubProfileViewer-App/assets/77855407/1d2152a1-8503-4d18-88a1-737e6335243e" width=300>
 <img src="https://github.com/erhansennx/GithubProfileViewer-App/assets/77855407/8b131948-fb6b-42bd-b27a-bff00d03c9f7" width=300>
 <img src="https://github.com/erhansennx/GithubProfileViewer-App/assets/77855407/d3552755-cc66-4f95-b608-59d98e2e8481" width=300>
 <img src="https://github.com/erhansennx/GithubProfileViewer-App/assets/77855407/a3b299e9-4201-4083-91ff-b8d15cc898f5" width=300>
