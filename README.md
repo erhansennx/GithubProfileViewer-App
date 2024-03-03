@@ -8,7 +8,7 @@ Bu uygulama, kullanıcıların GitHub profil bilgilerini görüntülemelerine ol
 - Kullanıcı profillerinde genel bilgileri, takipçi ve takip edilen sayılarını, repo sayılarını görebilme.
 - Profil resmini, bio bilgisini ve repo listesini görebilme.
 
-<h2> App Screenshots </h2>
+## Uygulama İçi Görüntüler
 <img src="https://github.com/erhansennx/GithubProfileViewer-App/assets/77855407/1d2152a1-8503-4d18-88a1-737e6335243e" width=300>
 <img src="https://github.com/erhansennx/GithubProfileViewer-App/assets/77855407/31b7cd02-7416-44d1-a37e-05d3aeee605f" width=300>
 <img src="https://github.com/erhansennx/GithubProfileViewer-App/assets/77855407/c4a999f2-0561-4e40-a512-1bfafbcf6b0e" width=300>
