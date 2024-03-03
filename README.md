@@ -1,5 +1,12 @@
-# GithubProfileViewer-App
+# Github Profile Viewer App
 
+Bu uygulama, kullanıcıların GitHub profil bilgilerini görüntülemelerine olanak sağlayan android mobil uygulamadır.
+
+## Özellikler
+
+- Kullanıcıların GitHub kullanıcı adlarını girerek profillerini görüntüleyebilme.
+- Kullanıcı profillerinde genel bilgileri, takipçi ve takip edilen sayılarını, repo sayılarını görebilme.
+- Profil resmini, bio bilgisini ve repo listesini görebilme.
 
 <h2> App Screenshots </h2>
 <img src="https://github.com/erhansennx/GithubProfileViewer-App/assets/77855407/1d2152a1-8503-4d18-88a1-737e6335243e" width=300>
